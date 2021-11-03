@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public  class StaticData {
+public class StaticData {
 
-    private List<Forest> forests = new ArrayList<>();
 
-    public StaticData() {
+    public static List<Forest> getForests() {
+
+        List<Forest> forests = new ArrayList<>();
 
         Forest forest = new Forest(new OID(new ObjectId()), "forest name", "canada", "23.55", new ArrayList<>());
 
@@ -44,6 +45,8 @@ public  class StaticData {
         forest.setZones(zones);
 
         forests.add(forest);
+
+        return forests;
 
     }
 }

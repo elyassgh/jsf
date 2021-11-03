@@ -4,7 +4,7 @@ import com.example.projetJee.domain.*;
 import com.example.projetJee.service.ForestService;
 import com.example.projetJee.util.StaticData;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
@@ -15,9 +15,8 @@ import java.util.List;
 @RequestScoped
 public class ForestBean implements Serializable {
 
-    private ForestService forestService = ForestService.getInstance();
-
-    private StaticData data = new StaticData();
+    @Inject
+    private ForestService forestService;
 
     private List<Forest> forests;
 
@@ -29,7 +28,7 @@ public class ForestBean implements Serializable {
 
 /*    @PostConstruct
     public void init() {
-        this.forests = this.forestService.findAll();
+        this.forests = this.data.getForests();
     }*/
 
 /*    @PostUpdate
@@ -43,6 +42,7 @@ public class ForestBean implements Serializable {
         if(forests == null) this.forests = new ArrayList<>();
         //this.forests = data.getForests();
         // this.forests = this.forestService.findAll();
+        this.forests = StaticData.getForests();
         return forests;
     }
 

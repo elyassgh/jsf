@@ -1,6 +1,5 @@
 package com.example.projetJee.util;
 
-import com.example.projetJee.service.ForestService;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
@@ -14,7 +13,6 @@ public final class MongoConnection {
         try {
             this.client = MongoClients.create(uri);
             System.out.println("database connected successfully");
-            System.out.println(ForestService.getInstance().findAll());
         } catch (Exception e) {
             System.out.println("error");
         }

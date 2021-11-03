@@ -5,22 +5,15 @@ import com.example.projetJee.domain.Forest;
 import com.example.projetJee.model.ForestModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.ejb.Stateful;
+import jakarta.ejb.Stateless;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ForestService {
-
-    private static ForestService instance;
-
-    public static ForestService getInstance() {
-        if (instance == null) instance = new ForestService();
-        return instance;
-    }
-
-    private ForestService() {
-    }
+@Stateless
+public class ForestService {
 
     ForestModel model = ForestModel.getInstance();
     ObjectMapper objectMapper = new ObjectMapper();
