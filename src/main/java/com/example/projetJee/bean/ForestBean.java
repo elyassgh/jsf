@@ -1,80 +1,89 @@
 package com.example.projetJee.bean;
 
-import com.example.projetJee.domain.*;
+import com.example.projetJee.domain.Forest;
+import com.example.projetJee.domain.Zone;
 import com.example.projetJee.service.ForestService;
 import com.example.projetJee.util.StaticData;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
-@RequestScoped
+@SessionScoped
+@Setter
 public class ForestBean implements Serializable {
 
     @Inject
     private ForestService forestService;
 
+    @Inject
+    private UserBean userBean;
+
+    @Inject
+    private ZoneBean zoneSearchBean;
+
     private List<Forest> forests;
 
     private Forest selectedForest;
     private Zone selectedZone;
-    private List<Observation> selectedObservations;
-    private List<Fire> selectedFires;
-    private Indices selectedIndices;
 
-/*    @PostConstruct
+    @PostConstruct
     public void init() {
-        this.forests = this.data.getForests();
-    }*/
+        this.forests = StaticData.getForests();
+        // this.forests = this.forestService.findAll();
+    }
 
-/*    @PostUpdate
+    /*
+
+    @PostUpdate
     public void reload() {
         this.forests = this.forestService.findAll();
-    }*/
+    }
+
+    */
 
     // Getters :
 
     public List<Forest> getForests() {
-        if(forests == null) this.forests = new ArrayList<>();
-        //this.forests = data.getForests();
+        if (forests == null) this.forests = new ArrayList<>();
         // this.forests = this.forestService.findAll();
-        this.forests = StaticData.getForests();
         return forests;
     }
 
-    public List<Observation> getObservations() {
-        return selectedObservations;
+    public List<Zone> getZones() {
+        return selectedForest.getZones();
     }
 
-/*    public Zone getZone() {
-        if (selectedZone == null) selectedZone = new Zone();
-        return selectedZone;
+    public Zone getZone() {
+        return this.selectedZone;
     }
 
     public Forest getForest() {
-        if (selectedForest != null) this.selectedForest = new Forest();
+        if (selectedForest == null) this.selectedForest = new Forest();
         return selectedForest;
-    }*/
+    }
 
 
     // Actions :
 
-    public String toObservations(Zone zone) {
-        this.selectedObservations = zone.getObservations();
+    public String toObservations(Forest forest, Zone zone) {
+        this.selectedForest = forest;
+        this.selectedZone = zone;
+        zoneSearchBean.setZone(zone);
+        zoneSearchBean.setObservations(zone.getObservations());
         return "/observation";
     }
 
-    public String toFires(Zone zone) {
-        this.selectedFires = zone.getFires();
+    public String toFires(Forest forest, Zone zone) {
+        this.selectedForest = forest;
+        this.selectedZone = zone;
         return "/fire";
     }
 
-    public String toIndices(Observation observation) {
-        this.selectedIndices = observation.getIndices();
-        return "/indices";
-    }
 }

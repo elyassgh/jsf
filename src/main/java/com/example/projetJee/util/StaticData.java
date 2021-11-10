@@ -27,10 +27,10 @@ public class StaticData {
         trees.add(new Tree(new OID(new ObjectId()), null, null, "15", null, null));
 
         List<Observation> observations = new ArrayList<>();
-        observations.add(new Observation(new OID(new ObjectId()), "53", "23", "32", "50", "2021-11-01",new Indices(null, "20" ,"34", "12" , "69")));
-        observations.add(new Observation(new OID(new ObjectId()), "15", "11", "19", "23", "2021-11-02",new Indices(null, "20" ,"34", "12" , "69")));
-        observations.add(new Observation(new OID(new ObjectId()), "90", "43", "32", "11", "2021-11-03",new Indices(null, "20" ,"34", "12" , "69")));
-        observations.add(new Observation(new OID(new ObjectId()), "32", "15", "34", "32", "2021-11-04",new Indices(null, "20" ,"34", "12" , "69")));
+        observations.add(new Observation(new OID(new ObjectId()), "53", "23", "32", "50", "2021-11-01",new Indices(new OID(new ObjectId()), "20" ,"34", "12" , "69")));
+        observations.add(new Observation(new OID(new ObjectId()), "15", "11", "19", "23", "2021-11-02",new Indices(new OID(new ObjectId()), "20" ,"34", "12" , "69")));
+        observations.add(new Observation(new OID(new ObjectId()), "90", "43", "32", "11", "2021-11-03",new Indices(new OID(new ObjectId()), "20" ,"34", "12" , "69")));
+        observations.add(new Observation(new OID(new ObjectId()), "32", "15", "34", "32", "2021-11-04",new Indices(new OID(new ObjectId()), "20" ,"34", "12" , "69")));
 
         List<Fire> fires = new ArrayList<>();
         fires.add(new Fire(new OID(new ObjectId()), "0", "2021-11-01"));
@@ -40,7 +40,7 @@ public class StaticData {
 
 
         zones.add(new Zone(new OID(new ObjectId()),"A", "0", "15", trees, observations, fires));
-        zones.add(new Zone(new OID(new ObjectId()),"A", "1", "30", trees, null, null));
+        zones.add(new Zone(new OID(new ObjectId()),"A", "1", "30", trees, observations, null));
 
         forest.setZones(zones);
 

@@ -2,7 +2,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <!-- Required meta tags -->
@@ -10,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content="it"/>
     <meta name="keywords" content="Rapoo,creative, agency, startup,onepage, clean, modern,business, company,it"/>
-    <title>IRISI- Incendie Forecast (Login)</title>
+    <title>IRISI- Incendie Forecast</title>
 
     <!-- bootstrap.min css -->
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css"/>
@@ -28,6 +27,7 @@
     <link rel="stylesheet" href="css/style.css"/>
 
 </h:head>
+
 <h:body>
 
     <!-- LOADER TEMPLATE -->
@@ -49,7 +49,7 @@
       "
     >
         <div class="container">
-            <a class="navbar-brand" href="/home">
+            <a class="navbar-brand" href="#">
                 <h3>Incendie Forecast</h3>
             </a>
             <!-- Toggler -->
@@ -70,7 +70,7 @@
                 <!-- Links -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="#" class="nav-link js-scroll-trigger"> Home </a>
+                            <a jsf:action="/home" class="nav-link js-scroll-trigger"> Home </a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link js-scroll-trigger">
@@ -113,7 +113,7 @@
     </nav>
 
     <!-- HERO
-================================================== -->
+    ================================================== -->
     <section class="page-banner-area page-contact">
         <div class="overlay"></div>
         <!-- Content -->
@@ -140,8 +140,7 @@
                     <div class="col-md-8 col-lg-6 text-center">
                         <div class="section-heading">
                             <!-- Heading -->
-                            <h2 class="section-title">Foret #{forest._id}</h2>
-
+                            <h2 class="section-title">Foret ##{forest._id}</h2>
                             <!-- Subheading -->
                             <p>
                                 #{forest.name}
@@ -164,21 +163,25 @@
                                             class="img-fluid"
                                     />
                                     <div style="position: absolute; top: 40%; left: 0; width: 100%">
-                                        <h3 class="text-white">Zone ##{zone._id}</h3>
+                                        <h4 class="text-white">Zone ##{zone._id}</h4>
                                     </div>
                                 </div>
                                 <h3>Trees : 50</h3>
                                 <p>X: #{zone.xindex}, Y: #{zone.yindex}, Surface : #{zone.surface}m²</p>
-                                <div class="btn-group-md">
-                                    <a class="btn btn-sm btn-primary" jsf:action="#{forestBean.toObservations(zone)}" >Observation</a>
-                                    <a class="btn btn-sm btn-primary" jsf:action="#{forestBean.toFires(zone)}">Incendies</a>
-                                </div>
+                                <h:form class="btn-group-md">
+                                    <h:commandButton class="btn btn-sm btn-primary m-1" value="Observation"
+                                                     action="#{forestBean.toObservations(forest, zone)}"/>
+                                    <button type="submit" class="btn btn-sm btn-primary m-1"
+                                            jsf:action="#{forestBean.toFires(forest, zone)}">Incendies
+                                    </button>
+                                </h:form>
                             </div>
                         </div>
                     </p:repeat>
 
                 </div>
             </div>
+
         </ui:repeat>
     </section>
 
@@ -284,4 +287,5 @@
     <script src="js/form/contact.js"></script>
     <script src="js/theme.js"></script>
 </h:body>
+
 </html>

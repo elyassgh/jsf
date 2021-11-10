@@ -5,15 +5,17 @@ import com.example.projetJee.domain.Forest;
 import com.example.projetJee.model.ForestModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.ejb.Stateful;
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 import org.bson.types.ObjectId;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Stateless
-public class ForestService {
+@Named
+@ApplicationScoped
+public class ForestService implements Serializable {
 
     ForestModel model = ForestModel.getInstance();
     ObjectMapper objectMapper = new ObjectMapper();

@@ -1136,11 +1136,6 @@ PRICING-2
   text-transform: capitalize;
 }
 
-.pricing-box:hover {
-  background: #1d1c1c;
-  border-color: #1d1c1c;
-}
-
 .pricing-box:hover .price-features li {
   color: #eee;
 }

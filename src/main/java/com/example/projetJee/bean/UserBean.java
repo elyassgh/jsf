@@ -5,6 +5,7 @@ import com.example.projetJee.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Setter;
 
@@ -17,15 +18,15 @@ public class UserBean {
     private String email;
     private String password;
 
-    @EJB
+    @Inject
     private UserService userService;
 
     public String login() throws JsonProcessingException {
-/*        this.user = this.userService.findByAttribute("email", email);
+/*      this.user = this.userService.findByAttribute("email", email);
         if (user != null)
             if (user.getPassword().equals(password))
                 return "/home";*/
-        return "/forests";
+        return "/home";
     }
 
     public User getUser() {
